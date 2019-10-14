@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <style>
+        .hello { width: 100%; height: 5em;}
+    </style>
+    <!-- Page Content -->
+    <div class="container">
+        {% for post in allpost %}
+        <div class="row">
+
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Title -->
+                <h1 class="mt-4">{{ post.title }}</h1>
+
+                <hr>
+
+                <!-- Preview Image -->
+
+                    <img class="img-fluid rounded mb-3 mb-md-0" style="min-width: 700px; max-width: 700px" src="{{ vich_uploader_asset(post, 'imageFile')}}" height="300" alt="yeet">
+                <hr>
+
+                <!-- Post Content -->
+                <p class="lead">{{ post.body }} </p>
+                <hr>
+
+                <a class="btn btn-primary" style="border: 1px solid red; background: red;" href="/accept/{{ post.id }}">Approve</a>
+                <a class="btn btn-primary" style="border: 1px solid red; background: red;" href="/decline/{{ post.id }}">Decline</a>
+                {% endfor %}
+        </span>
+    </div>
+{% endblock %}

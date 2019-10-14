@@ -17,7 +17,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 class Post
 {
     /**
-     * @ORM\Id()
+     * @ORM\Id()php
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
@@ -77,6 +77,11 @@ class Post
      * @var /DateTime
      */
     private $updatedAt;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $approved;
 
     public function __construct()
     {
@@ -202,5 +207,17 @@ class Post
     public function getImageSize(): ?int
     {
         return $this->imageSize;
+    }
+
+    public function getApproved(): ?bool
+    {
+        return $this->approved;
+    }
+
+    public function setApproved(?bool $approved): self
+    {
+        $this->approved = $approved;
+
+        return $this;
     }
 }

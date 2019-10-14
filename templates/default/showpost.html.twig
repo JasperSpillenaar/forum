@@ -1,5 +1,72 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{{ allpost.id }}
+    <style>
+        .hello { width: 100%; height: 5em;}
+    </style>
+    <!-- Page Content -->
+    <div class="container">
+
+    <div class="row">
+
+    <!-- Post Content Column -->
+    <div class="col-lg-8">
+
+    <!-- Title -->
+    <h1 class="mt-4">{{ allpost.title }}</h1>
+
+    <hr>
+
+    <!-- Preview Image -->
+        <img style="height: 350px; width: 700px; " class="img-fluid rounded mb-3 mb-md-0" src="{{ vich_uploader_asset(allpost, 'imageFile')}}" alt="">
+
+    <hr>
+
+    <!-- Post Content -->
+        <p class="lead">{{ allpost.body }} </p>
+    <hr>
+        {% if is_granted('ROLE_USER') %}
+
+    <!-- Comments Form -->
+    <div class="card my-4">
+        <h5 class="card-header">Leave a Comment:</h5>
+        <div class="card-body">
+            {{ include('default/_form.html.twig') }}
+        </div>
+    </div>
+
+    <!-- Single Comment -->
+        <div class="container">
+            {% for comment in comment %}
+                <div class="singleComment" style="border: 1px solid grey; margin: 10px 0;">
+                    <div class="panel-heading" style="text-align: center; background: lightgrey; "><strong>{{ comment.user }}</strong></div>
+                    <p class="panel-body" style="text-align: center;">{{ comment.body }}</p>
+                    <br>
+                </div>
+            {% endfor %}
+        </div>
+        {% elseif is_granted('ROLE_USER') %}
+        <!-- Comments Form -->
+        <div class="card my-4">
+            <h5 class="card-header">Leave a Comment:</h5>
+            <div class="card-body">
+                {{ include('default/_form.html.twig') }}
+            </div>
+        </div>
+
+        <!-- Single Comment -->
+        <div class="container">
+            {% for comment in comment %}
+                <div class="singleComment" style="border: 1px solid grey; margin: 10px 0;">
+                    <div class="panel-heading" style="text-align: center; background: lightgrey; "><strong>{{ comment.user }}</strong></div>
+                    <p class="panel-body" style="text-align: center;">{{ comment.body }}</p>
+                    <br>
+                </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        {% endif %}
+    </div>
+    </div>
+    </div>
 {% endblock %}

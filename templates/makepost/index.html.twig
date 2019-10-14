@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <style>
+        .hello { width: 100%; height: 5em;}
+    </style>
+    <!-- Page Content -->
+    <div class="container">
+        {% for allpost in allpost %}
+        <div class="row">
+
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Title -->
+                <h1 class="mt-4">{{ allpost.title }}</h1>
+
+                <hr>
+
+                <!-- Preview Image -->
+                <img style="height: 350px; width: 700px; " class="img-fluid rounded mb-3 mb-md-0" src="{{ vich_uploader_asset(allpost, 'imageFile')}}" alt="">
+
+                <hr>
+
+                <!-- Post Content -->
+                <p class="lead">{{ allpost.body }} </p>
+                <hr>
+                    </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
