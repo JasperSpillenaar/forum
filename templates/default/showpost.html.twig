@@ -41,7 +41,10 @@
                 <div class="singleComment" style="border: 1px solid grey; margin: 10px 0;">
                     <div class="panel-heading" style="text-align: center; background: lightgrey; "><strong>{{ comment.user }}</strong></div>
                     <p class="panel-body" style="text-align: center;">{{ comment.body }}</p>
-                    <br>
+                    {% if is_granted ('ROLE_ADMIN') %}
+                    <a class="btn btn-primary" style="border: 1px solid red; background: red;" href="/delete/{{ comment.id }}">Delete</a>
+                    {% endif %}
+                        <br>
                 </div>
             {% endfor %}
         </div>
@@ -60,6 +63,7 @@
                 <div class="singleComment" style="border: 1px solid grey; margin: 10px 0;">
                     <div class="panel-heading" style="text-align: center; background: lightgrey; "><strong>{{ comment.user }}</strong></div>
                     <p class="panel-body" style="text-align: center;">{{ comment.body }}</p>
+                    <a class="btn btn-primary" style="border: 1px solid red; background: red;" href="/delete/{{ post.id }}">Delete</a>
                     <br>
                 </div>
             {% endfor %}

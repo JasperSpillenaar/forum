@@ -80,6 +80,19 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @Route("/delete/{id}", name="delete")
+     */
+    public function messagedelete($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $reaction = $this->getDoctrine()->getRepository(reaction::class)->find($id);
+        $em->remove($reaction);
+        $em->flush();
+
+        return $this->redirect('/');
+    }
+
+    /**
      * @Route("/form/{id}", name="showpost")
      */
     public function showpost($id, Request $request)
